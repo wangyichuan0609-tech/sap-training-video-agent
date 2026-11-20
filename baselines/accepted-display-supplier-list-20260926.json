@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "accepted-display-supplier-list-20260926-v1",
+  "status": "user-accepted",
+  "acceptedAt": "2026-09-26T22:11:36+08:00",
+  "git": {
+    "branch": "codex/accepted-video-standard-20260926",
+    "tag": "accepted-display-supplier-list-20260926-v1",
+    "baseHeadBeforeFreeze": "51e032eefb3c1ac7ffe80e62d469ca2b5902ae43",
+    "remoteBackup": false
+  },
+  "run": {
+    "directory": "artifacts/recordly-sap-display-supplier-list-20260926-061920",
+    "runJson": "artifacts/recordly-sap-display-supplier-list-20260926-061920/run.json",
+    "safeRecoveryPoint": "Supplier 1024 profile, Activities section"
+  },
+  "acceptedVideo": {
+    "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/final/training-video-improved-v3.mp4",
+    "sha256": "F7BF93CFAED3B4A75850E711D8DADFAD4CEB44044D0DDAF2C240423B05D8438B",
+    "sizeBytes": 27248339,
+    "durationSeconds": 85.833333,
+    "video": {
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frameRate": 30
+    },
+    "audio": {
+      "codec": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 85.803
+    },
+    "validation": {
+      "ffprobe": "passed",
+      "fullDecode": "passed",
+      "focusedPreview": "passed",
+      "avDurationDeltaSeconds": 0.030332999999998833,
+      "timeline": "not-provided"
+    }
+  },
+  "immutableCapture": {
+    "segment": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/capture/segment.webm",
+      "sha256": "938BB9D9EF207B14F4EFB481D88DC8260B9FE409937327E735E97432808517BD",
+      "sizeBytes": 66862911
+    },
+    "rawMaster": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/capture/raw-master.mp4",
+      "sha256": "ED79DBCA6EF835CCEC8AC4629ED63965CB4438DE2EE3E79337B8733BC1F516E5",
+      "sizeBytes": 166111462
+    },
+    "cursor": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/capture/raw-master.mp4.cursor.json",
+      "sha256": "AD496C982A6C336D6CD6D7724E3707AE540D3B9D2ED657AD1CBE9C4531F2F724"
+    },
+    "actionLog": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/capture/action-log.json",
+      "sha256": "C9A27042787985A198F5ADFD3394AB3A66EB7FF45664C69FC766708E9B3EE0AA"
+    },
+    "diagnostics": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/capture/recording-diagnostics.json",
+      "sha256": "9172CA3B0516FC2AB7FC2BBD2D1F1E834F8842F58FC38C8C1C662EE3B0A00B3F"
+    }
+  },
+  "exactGenerationInputs": {
+    "teachingPlan": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/teaching-plan.json",
+      "sha256": "2FBEF69A77A1FA04B9E3C5B9AE76F9F51299FA49D4FD3DC0A280680F40A21E34"
+    },
+    "ttsManifest": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/tts-manifest-v4.json",
+      "sha256": "3289AE9376517CF800F94F3A326BD793DF02C30567CB59E8DB792DF363F304A4",
+      "audioSource": "inputs.audio in the full contract is the authoritative list of 20 WAV files"
+    },
+    "fullProject": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/final-v4.recordly.bak",
+      "sha256": "60412FF695A4B54AA3D2D78C657E8D9E06624AD038E648B12C4B1D4B0872FA34",
+      "contract": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/final-v4.recordly.contract.json",
+      "note": "This .bak is the exact pre-export project whose hash is bound by the contract; the same-named main project was normalized by Recordly autosave after export."
+    },
+    "focusedProject": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/focused-v4.recordly.bak",
+      "sha256": "0E02A8EB6C6997672CD2578B8AD6498D8F289E285F987F97D74B0EFE72951494",
+      "contract": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/focused-v4.recordly.contract.json",
+      "preview": "artifacts/recordly-sap-display-supplier-list-20260926-061920/final/focused-preview-v4.mp4"
+    },
+    "cover": {
+      "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/assets/display-supplier-list-cover-ppt.png",
+      "sha256": "C1848D3177DA881F204F8103B262B48779028092022C70DC12980BD366AD9B91"
+    }
+  },
+  "externalInputs": {
+    "sourcePptx": {
+      "path": "<external>/source-procedure.pptx",
+      "sha256": "07767D9BC59E52B6A3D8D93B066E12B199C4B2955F187EE093ED45766F3E1BDA",
+      "slideCount": 10
+    },
+    "manualReferenceVideo": {
+      "path": "<external>/reference-video.mp4",
+      "sha256": "6FBE8718E9DC4A636F41033D3C53AD74013B6B9256F33BEDEF8DCB094DCAD384",
+      "purpose": "visual and narration reference only"
+    },
+    "cosyVoiceReferenceAudio": {
+      "path": "CosyVoice-main/asset/zero_shot_prompt_Mix.wav",
+      "sha256": "631EF6E7A8C6087297FDC3EE5991B8ACC2D4A980417E71F2332D870095ED2365"
+    },
+    "cosyVoiceReferenceText": {
+      "path": "CosyVoice-main/asset/zero_shot_prompt_Mix.txt",
+      "sha256": "F0A54B682BB4E2AA1804F1E65091AFC6C37BC03D9D0C993AED1703A35658F85D"
+    }
+  },
+  "productionSourceHashes": {
+    "scripts/build-recordly-project.mjs": "1BCC8A4554C1CED24CB7EEDB2276722A7685FDF7D1031B832CDDF1DAFE796D58",
+    "scripts/generate-recordly-tts.mjs": "669598C4709203151C452D9C2CECC9A94CA2D0CCC62CE62A11BA439BC16D2C02",
+    "scripts/recordly-control.mjs": "397BFDE51AA6AB9863AF49E28FEDBD0A60138D86A711C74C8CF76B5DCA0A0316",
+    "scripts/validate-final-video.mjs": "A5E3688EE7207D8C24881FE9FA2AA70452F8A5F1A777F67634414DB275C4CC16",
+    "actions/tts/cosyvoice_action.py": "FBA393D062498971CA4C4ACF539970C80DF0EDCE03F003F6794EE397B4695C49",
+    "actions/tts/cosyvoice_batch.py": "B006251183373AB74C28024155C025B29B8633BAB9AB18FE2AE3C1BFE551C975",
+    "recordly/package-lock.json": "5C6BAB19382F69D7DB7476E16571211969B195344A31FAD33EA93030C815C0F9",
+    "recordly/dist-electron/main.cjs": "B4CB30F1E15079E90788AAD9ABBDB3E9150C4609BA8F331F5A1889044A91800F"
+  },
+  "runtime": {
+    "electronVersion": "43.1.0",
+    "electronExecutable": "recordly/node_modules/electron/dist/electron.exe",
+    "electronExecutableSha256": "67CFF2CE5AC7976408AAC30E17E9266443A351B44EC1EE613B444867A78DC9D7",
+    "rendererBuildDirectory": "recordly/dist",
+    "electronMain": "recordly/dist-electron/main.cjs",
+    "note": "The exact generated Recordly dist and dist-electron trees are included in the baseline tag only; normal development rebuilds them from the committed source and package-lock."
+  },
+  "execution": {
+    "focusedScenes": [
+      "course-intro",
+      "search-display-supplier-list",
+      "submit-application-search",
+      "open-display-supplier-list",
+      "open-adapt-filters",
+      "activate-purchasing-organization",
+      "confirm-filter-field",
+      "open-purchasing-organization-value-help",
+      "explain-purchasing-organization",
+      "choose-purchasing-organization",
+      "confirm-purchasing-organization",
+      "execute-supplier-query",
+      "verify-stable-supplier-results"
+    ],
+    "sequence": [
+      "generate-recordly-tts.mjs with the Teaching Plan and CosyVoice Python",
+      "build-recordly-project.mjs --mode=final for full project",
+      "build-recordly-project.mjs --mode=final --focused=<consecutive scene ids> for Focused Preview",
+      "recordly-control.mjs export --phase=focused",
+      "visual review of the focused MP4, then validate-final-video.mjs --gate=focused --visual-review=passed",
+      "recordly-control.mjs export --phase=full with focused contract and authoritative run.json"
+    ],
+    "export": {
+      "format": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "width": 1920,
+      "height": 1080,
+      "frameRate": 30,
+      "quality": "source",
+      "wholeVideoPlaybackRate": 1
+    }
+  },
+  "standardization": {
+    "commits": [
+      "d5ccb13fc9b72977316cad075ae6f283e8d81ce4",
+      "30e09ee18099d91c5fed376eba18f5bc8eb90b7b",
+      "f41e5be72d98141ec4316b97fd6a8e871135965d",
+      "3968fc1d95662bebe08ed42c01c72b6e1149b2a4",
+      "3c4070b232b794540748bb06509c85291f7081a8"
+    ],
+    "productionEntry": "PRODUCTION_STANDARD.md",
+    "postCleanVerification": {
+      "artifactRetentionNote": "Redundant verification copies were deleted on 2026-10-27 with user authorization. Paths below now identify retained byte-identical canonical artifacts; the verification results describe the original exports.",
+      "focusedPreview": {
+        "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/final/focused-preview-v4.mp4",
+        "sha256": "1E61E6BAC5ACE051D0FAFB55736FD7958F2103E4EBA120E9166C80BFBDD32766",
+        "visualReview": "passed",
+        "timeline": {
+          "audioRegions": 13,
+          "captions": 13,
+          "status": "passed"
+        }
+      },
+      "fullVideo": {
+        "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/final/training-video-improved-v3.mp4",
+        "sha256": "F7BF93CFAED3B4A75850E711D8DADFAD4CEB44044D0DDAF2C240423B05D8438B",
+        "consecutiveIdenticalExports": 2,
+        "byteIdenticalToAcceptedVideo": true,
+        "timeline": {
+          "audioRegions": 20,
+          "captions": 20,
+          "status": "passed"
+        },
+        "mediaValidation": {
+          "ffprobe": "passed",
+          "fullDecode": "passed",
+          "avTiming": "passed"
+        }
+      },
+      "projects": {
+        "fullSha256": "60412FF695A4B54AA3D2D78C657E8D9E06624AD038E648B12C4B1D4B0872FA34",
+        "focusedSha256": "0E02A8EB6C6997672CD2578B8AD6498D8F289E285F987F97D74B0EFE72951494",
+        "unchangedAcrossExports": true,
+        "unexpectedBakFiles": 0
+      },
+      "visualSamplingSeconds": [
+        1.5,
+        9.4,
+        24.8,
+        44.1,
+        52.4,
+        57.8,
+        62.2,
+        66,
+        70.5,
+        74.5,
+        78.5,
+        83,
+        85
+      ],
+      "audioComparison": {
+        "decodedPcmSha256": "464CCED2BB990375DD6612DEE4886B84B7EBA38EAC23D9DC9DFE49D0A11B54CA",
+        "identicalToAcceptedAndPreClean": true,
+        "meanVolumeDb": -21.8,
+        "maxVolumeDb": -3,
+        "silenceProfileIdentical": true
+      },
+      "coverRebuild": {
+        "path": "artifacts/recordly-sap-display-supplier-list-20260926-061920/recordly/assets/display-supplier-list-cover-ppt.png",
+        "sha256": "C1848D3177DA881F204F8103B262B48779028092022C70DC12980BD366AD9B91",
+        "byteIdenticalToAcceptedCover": true,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "cleanup": {
+      "removedDuplicateElectronRuntimeBytes": 377736103,
+      "removedUnreferencedTtsCacheFiles": 21,
+      "removedUnreferencedTtsCacheBytes": 6586828,
+      "retainedAuthoritativeRunWavs": 20,
+      "retainedCompleteHistoricalRecordings": 0,
+      "retentionUpdatedAt": "2026-10-27"
+    }
+  },
+  "approvedReusableStandards": {
+    "architecture": "Recordly built-in SAP BrowserWindow and Browser-originated DOM telemetry only; no external Chrome, Playwright, desktop capture, OS mouse, or login segment",
+    "editing": "Keep the real successful path; compress non-teaching waits, remove exploration and redundant pauses, preserve business order",
+    "idleDisplayMaximumMs": 700,
+    "zoom": "Default full page. Use 1.5x only when a knowledge point is unreadable at 1080p; 550 ms in and 550 ms out; no ordinary-click zoom; one zoom for continuous work on the same control; return to full page between knowledge points",
+    "highlight": "Not automatic. The accepted video uses zero highlight annotations; add one only when DOM geometry is reliable and it materially helps teaching",
+    "caption": "Narration Script is the only text source; fixed near the bottom; small low-occlusion style; at most two lines; cue ends at measured WAV duration",
+    "narration": "Chinese professional instructor tone, concise operation-first wording. Explain business meaning only when the PPT supplies it. Supplier Profile narration describes actual clicks, scrolling and right-arrow navigation",
+    "tts": "CosyVoice only; paired zero_shot_prompt_Mix reference; Chinese and mixed speed 0.95; complete English speed 1.0",
+    "cover": "Reuse the PPT first-slide visual when suitable; retain the course title and stable branding, remove non-teaching date/project metadata",
+    "stagePrompts": "Use sparingly for genuine phase changes; do not cover an already self-explanatory result screen",
+    "release": "Focused visual review, ffprobe, full FFmpeg decode, H.264/AAC, 1920x1080, CFR 30 fps, source quality, and A/V timing must pass before publication"
+  },
+  "runSpecificOnly": {
+    "application": "Display Supplier List",
+    "purchasingOrganization": "MTI POrg (2430)",
+    "supplier": "1024",
+    "stableResultCount": 391,
+    "narrationText": "recordly/teaching-plan.json",
+    "sceneSourceTimesAndDomGeometry": "recordly/teaching-plan.json and capture sidecars",
+    "coverAsset": "recordly/assets/display-supplier-list-cover-ppt.png"
+  },
+  "knownProvenanceGaps": [
+    "The exact pre-export run.json bytes whose SHA256 is 36FAA4C26610BB675EFBAC6E73A7E7326F2D343F1AEE9AF7CF3728D797C759B5 were not preserved; final validation updated run.json in place.",
+    "The accepted validation did not receive --project, so timeline validation is recorded as not-provided even though focused visual review and media validation passed.",
+    "Complete-English TTS speed 1.0 is a confirmed project rule but was not exercised by this all-Chinese/mixed accepted video."
+  ]
+}

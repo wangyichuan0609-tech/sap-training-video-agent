@@ -1,0 +1,31 @@
+# Credentials and local environment
+Sap Login Info.txt
+.env
+.env.*
+!.env.example
+.venv*/
+**/node_modules/
+**/.profiles/
+
+# Local models, caches, and generated Python files
+CosyVoice-main/pretrained_models/
+CosyVoice-main/third_party/Matcha-TTS/
+**/__pycache__/
+*.py[cod]
+.tmp/
+assets/tts-cache/
+assets/login/
+**/.tts-work/
+test.wav
+test_en.wav
+
+# Generated runs and local Electron runtimes stay out of ordinary Git adds.
+# User-approved run inputs/outputs are force-added selectively and protected by
+# baselines/*.json plus Git LFS.
+artifacts/
+
+# Local test/build outputs
+**/.vite/
+
+# Upstream CosyVoice checkout (clone separately, see README)
+CosyVoice-main/

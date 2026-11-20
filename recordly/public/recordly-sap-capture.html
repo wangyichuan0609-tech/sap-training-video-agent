@@ -1,0 +1,167 @@
+<!doctype html>
+<!-- Served only by Recordly's existing 127.0.0.1 renderer server. -->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'none'; script-src 'unsafe-inline'"
+		/>
+		<title>Recordly SAP capture renderer</title>
+	</head>
+	<body>
+		<script>
+			(() => {
+				"use strict";
+
+				const api = window.recordlySapCapture;
+				const MIME_TYPES = [
+					"video/webm;codecs=vp9",
+					"video/webm;codecs=vp8",
+					"video/webm",
+				];
+				const VIDEO_WIDTH = 1920;
+				const VIDEO_HEIGHT = 1080;
+				const VIDEO_FRAME_RATE = 30;
+				const VIDEO_BITS_PER_SECOND = 8_000_000;
+
+				let activeSessionId = null;
+				let activeStream = null;
+				let activeRecorder = null;
+				let nextSequence = 0;
+				let chunkWrites = Promise.resolve();
+				let terminalReported = false;
+
+				function errorMessage(error) {
+					return error instanceof Error ? error.message : String(error || "Capture failed.");
+				}
+
+				function stopTracks() {
+					if (activeStream) {
+						for (const track of activeStream.getTracks()) track.stop();
+					}
+					activeStream = null;
+					activeRecorder = null;
+				}
+
+				async function reportFailure(error) {
+					if (terminalReported || !activeSessionId) return;
+					terminalReported = true;
+					const sessionId = activeSessionId;
+					stopTracks();
+					try {
+						await api.didFail(sessionId, errorMessage(error));
+					} catch {
+						// The main process may already have torn down this private renderer.
+					}
+				}
+
+				async function writeChunk(blob) {
+					if (!activeSessionId || terminalReported || blob.size === 0) return;
+					const data = new Uint8Array(await blob.arrayBuffer());
+					const sequence = nextSequence;
+					nextSequence += 1;
+					await api.writeChunk(activeSessionId, sequence, data);
+				}
+
+				api.onStart(async (request) => {
+					if (activeRecorder || activeSessionId) {
+						await reportFailure(new Error("A capture is already active."));
+						return;
+					}
+
+					activeSessionId = request.sessionId;
+					nextSequence = 0;
+					chunkWrites = Promise.resolve();
+					terminalReported = false;
+
+					try {
+						activeStream = await navigator.mediaDevices.getUserMedia({
+							video: {
+								mandatory: {
+									chromeMediaSource: "tab",
+									chromeMediaSourceId: request.streamId,
+									minWidth: VIDEO_WIDTH,
+									maxWidth: VIDEO_WIDTH,
+									minHeight: VIDEO_HEIGHT,
+									maxHeight: VIDEO_HEIGHT,
+									minFrameRate: VIDEO_FRAME_RATE,
+									maxFrameRate: VIDEO_FRAME_RATE,
+								},
+							},
+						});
+
+						if (activeStream.getAudioTracks().length !== 0) {
+							throw new Error("SAP tab capture unexpectedly returned audio.");
+						}
+						const videoTrack = activeStream.getVideoTracks()[0];
+						if (!videoTrack) {
+							throw new Error("SAP tab capture did not return a video track.");
+						}
+						try {
+							await videoTrack.applyConstraints({
+								width: { exact: VIDEO_WIDTH },
+								height: { exact: VIDEO_HEIGHT },
+								frameRate: { exact: VIDEO_FRAME_RATE },
+							});
+						} catch {
+							// The final pipeline normalizes frame rate; source binding remains valid.
+						}
+
+						const mimeType = MIME_TYPES.find((candidate) =>
+							MediaRecorder.isTypeSupported(candidate),
+						);
+						activeRecorder = new MediaRecorder(activeStream, {
+							videoBitsPerSecond: VIDEO_BITS_PER_SECOND,
+							...(mimeType ? { mimeType } : {}),
+						});
+						activeRecorder.addEventListener("dataavailable", (event) => {
+							chunkWrites = chunkWrites.then(() => writeChunk(event.data));
+							void chunkWrites.catch(reportFailure);
+						});
+						activeRecorder.addEventListener("error", (event) => {
+							void reportFailure(event.error || new Error("MediaRecorder failed."));
+						});
+						activeRecorder.addEventListener("stop", () => {
+							void (async () => {
+								try {
+									await chunkWrites;
+									if (!terminalReported && activeSessionId) {
+										await api.didStop(activeSessionId);
+										terminalReported = true;
+									}
+								} catch (error) {
+									await reportFailure(error);
+								} finally {
+									stopTracks();
+								}
+							})();
+						});
+						videoTrack.addEventListener("ended", () => {
+							if (activeRecorder?.state === "recording") {
+								void reportFailure(new Error("SAP tab video track ended unexpectedly."));
+							}
+						});
+
+						activeRecorder.start(request.timesliceMs);
+						await api.didStart(
+							activeSessionId,
+							activeRecorder.mimeType || mimeType || "video/webm",
+						);
+					} catch (error) {
+						await reportFailure(error);
+					}
+				});
+
+				api.onStop((request) => {
+					if (request.sessionId !== activeSessionId || terminalReported) return;
+					if (!activeRecorder || activeRecorder.state === "inactive") {
+						void reportFailure(new Error("MediaRecorder is not recording."));
+						return;
+					}
+					activeRecorder.stop();
+				});
+			})();
+		</script>
+	</body>
+</html>

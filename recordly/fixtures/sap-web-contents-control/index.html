@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'"
+		/>
+		<title>Fictitious SAP Control Fixture</title>
+		<style>
+			.hidden {
+				display: none;
+			}
+			button,
+			input,
+			select {
+				width: 240px;
+				height: 36px;
+				margin: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Fictitious Logon</h1>
+		<label for="fixture-existing-user">Existing User</label>
+		<input id="fixture-existing-user" value="fixture-user-value" />
+		<label for="fixture-existing-password">Existing Password</label>
+		<input id="fixture-existing-password" type="password" value="fixture-password-value" />
+
+		<button id="duplicate-one">Duplicate</button>
+		<button id="duplicate-two">Duplicate</button>
+		<button id="hidden-target" class="hidden">Hidden Target</button>
+		<button id="disabled-target" disabled>Disabled Target</button>
+		<input id="secret-target" type="password" aria-label="Secret Target" />
+
+		<label for="USERNAME_FIELD-inner">User</label>
+		<input id="USERNAME_FIELD-inner" autocomplete="off" />
+		<label for="PASSWORD_FIELD-inner">Password</label>
+		<input id="PASSWORD_FIELD-inner" type="password" autocomplete="off" />
+		<label for="LANGUAGE_SELECT">Language</label>
+		<select id="LANGUAGE_SELECT">
+			<option value="DE">DE</option>
+			<option value="EN">EN</option>
+		</select>
+		<button id="LOGIN_LINK">Log On</button>
+		<p id="result">Ready</p>
+		<script>
+			document.getElementById("LOGIN_LINK").addEventListener("click", () => {
+				let successfulClicks = 0;
+				const renderPasswordForm = () => {
+					document.body.innerHTML = `
+						<h1>Change Password</h1>
+						<p id="authenticated-user"></p>
+						<label for="current-password">Current Password</label>
+						<input id="current-password" type="password" autocomplete="current-password" />
+						<label for="new-password">New Password</label>
+						<input id="new-password" type="password" autocomplete="new-password" />
+						<label for="repeat-password">Repeat Password</label>
+						<input id="repeat-password" type="password" autocomplete="new-password" />
+						<button id="change-password">Change Password</button>
+						<button id="prepare-count-ambiguity">Prepare Input Count Failure</button>
+						<button id="prepare-button-ambiguity">Prepare Button Ambiguity</button>
+						<p id="result">Password form ready</p>
+					`;
+					document.getElementById("authenticated-user").textContent = "User accepted";
+					document.getElementById("change-password").addEventListener("click", () => {
+						const values = [
+							document.getElementById("current-password").value,
+							document.getElementById("new-password").value,
+							document.getElementById("repeat-password").value,
+						];
+						if (
+							values[0] === "fixture-login-password" &&
+							values[1] === "fixture-new-password" &&
+							values[2] === "fixture-new-password"
+						) {
+							successfulClicks += 1;
+							document.getElementById("result").textContent =
+								`Password Changed; successful clicks: ${successfulClicks}`;
+						} else {
+							document.getElementById("result").textContent = "Incorrect field order";
+						}
+					});
+					document
+						.getElementById("prepare-count-ambiguity")
+						.addEventListener("click", () => {
+							const extra = document.createElement("input");
+							extra.id = "extra-password";
+							extra.type = "password";
+							document.body.appendChild(extra);
+							document.getElementById("result").textContent =
+								`Prepared input count failure; successful clicks: ${successfulClicks}`;
+						});
+					document
+						.getElementById("prepare-button-ambiguity")
+						.addEventListener("click", () => {
+							document.getElementById("extra-password")?.remove();
+							const duplicate = document.createElement("button");
+							duplicate.textContent = "Change Password";
+							document.body.appendChild(duplicate);
+							document.getElementById("result").textContent =
+								`Prepared button ambiguity; successful clicks: ${successfulClicks}`;
+						});
+				};
+				document.body.innerHTML = `
+					<h1>Expired Password Logon</h1>
+					<label for="USERNAME_FIELD-inner">User</label>
+					<input id="USERNAME_FIELD-inner" autocomplete="username" />
+					<label for="expired-password">Password</label>
+					<input id="expired-password" type="password" autocomplete="current-password" />
+					<button id="open-password-change">Change Password</button>
+					<p id="result">Submitted</p>
+				`;
+				document.getElementById("open-password-change").addEventListener("click", () => {
+					const user = document.getElementById("USERNAME_FIELD-inner").value;
+					const password = document.getElementById("expired-password").value;
+					if (
+						user === "fixture-login-user" &&
+						password === "fixture-login-password"
+					) {
+						renderPasswordForm();
+					} else {
+						document.getElementById("result").textContent = "Enter your user and password";
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
